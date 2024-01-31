@@ -2,8 +2,10 @@ version: "3.8"
 
 services:
   web:
-    build: .
-    command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
+    build:
+      context: .
+      args:
+        - DJANGO_PORT=${DJANGO_PORT}
     env_file:
       - .env
     volumes:
@@ -11,7 +13,7 @@ services:
     networks:
       - django-network
     ports:
-      - "${SERVER_PORT}:8000"
+      - ${SERVER_PORT}:${DJANGO_PORT}
     depends_on:
       - db
       - redis
