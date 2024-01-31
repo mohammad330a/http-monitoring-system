@@ -1,6 +1,5 @@
 FROM python:3.9.6
 
-ARG
 RUN mkdir /code
 WORKDIR /code
 
