@@ -1,0 +1,17 @@
+# Django
+Django==4.2.6
+
+# DRF
+djangorestframework==3.14.0
+
+# database
+mysqlclient==2.1.0
+
+# celery
+#celery==4.2.1
+
+# redis
+#redis==2.10.6
+
+celery==5.3.4
+redis==5.0.1
