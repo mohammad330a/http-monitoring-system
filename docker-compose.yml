@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   web:
-    image: mohammad330a/http_monitoring_system
+    image: localhost:5000/http_monitoring_system:2.1
+    command: python manage.py runserver 0.0.0.0:${DJANGO_PORT}
     env_file:
       - .env
     volumes:
@@ -10,7 +11,7 @@ services:
     networks:
       - django-network
     ports:
-      - ${SERVER_PORT}:8000
+      - ${SERVER_PORT}:${DJANGO_PORT}
     depends_on:
       - db
       - redis
@@ -32,7 +33,7 @@ services:
     networks:
       - django-network
   celery:
-    image: mohammad330a/http_monitoring_system
+    image: localhost:5000/http_monitoring_system:2.1
     command: celery -A http_monitoring_system worker -l info
     volumes:
       - .:/code
@@ -44,7 +45,7 @@ services:
     env_file:
       - .env
   celery-beat:
-    image: mohammad330a/http_monitoring_system
+    image: localhost:5000/http_monitoring_system:2.1
     command: celery -A http_monitoring_system beat -l info
     volumes:
       - .:/code
