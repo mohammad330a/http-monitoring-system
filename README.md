@@ -54,4 +54,4 @@ which forwards port 2020 in http-monitoring-service pod to port 2030 in your loc
 #### note
 this repository is an implementation of my cloud computing course project in university, and it may has some issues.
 
-also the image ha been pushed to a local docker registry, so you need to change the image name in the kubernetes deployment file and docker-compose to your own image name.
+also the image has been pushed to a local docker registry, so you need to change the image name in the kubernetes deployment file and docker-compose to your own image name.
