@@ -1,0 +1,11 @@
+image:
+  repository: mohammad330a/http_monitoring_system
+  tag: 2.0
+  pullPolicy: IfNotPresent
+
+service:
+  name: http-monitoring-service
+  type: LoadBalancer
+  port: 80
+
+replicaCount: 1
