@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: celery-deployment
+  name: celery-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: celery-deployment
+    spec:
+      containers:
+      - name: celery-deployment
+        image: localhost:5000/http_monitoring_system:2.0
+        imagePullPolicy: Never
+        command: ['celery', '-A', 'http_monitoring_system', 'beat', '-l', 'info']
+        env:
+        - name: DJANGO_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: DJANGO_PORT
+        - name: CHECK_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: CHECK_INTERVAL
+        - name: DATABASE_ENGINE
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: DATABASE_ENGINE
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: DATABASE_NAME
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: monitoring-secret
+              key: DATABASE_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: monitoring-secret
+              key: DATABASE_PASSWORD
+        - name: DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: DATABASE_HOST
+        - name: DATABASE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: project-config
+              key: DATABASE_PORT
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"

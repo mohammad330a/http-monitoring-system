@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: project-config
+data:
+  CHECK_INTERVAL: "*/1"
+  SERVER_PORT: "2050"
+  DJANGO_PORT: "2040"
+  DATABASE_ENGINE: "django.db.backends.mysql"
+  DATABASE_NAME: "cloud_project"
+  DATABASE_HOST: "mariadb-write"
+  DATABASE_PORT: "3306"

@@ -14,6 +14,6 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-ARG DJANGO_PORT
-EXPOSE $DJANGO_PORT
-CMD python manage.py runserver 0.0.0.0:$DJANGO_PORT
+#ARG DJANGO_PORT
+#EXPOSE 8000
+#CMD ["python", "manage.py", "migrate", "&&", "python", "manage.py", "runserver", "0.0.0.0:8000"]
